@@ -4,6 +4,7 @@ Djangoでアプリを作ってみました。複数タグ付け可能なブロ�
 
 ## Description
 通常の投稿一覧とは別に、任意のタグの投稿一覧を見ることができます。
+ManyToManyFieldやforms.ModelFormの使用。
 
 ## Dependency
 言語: Python 3.7.4
