@@ -19,9 +19,10 @@ def new(request):
     post = form.save(commit=False)
     formset = TagInlineFormSet(request.POST, instance=post)
     if formset.is_valid():
+      post.author_id = request.user.id
       post.save()
       formset.save()
-      return redirect(index)
+      return redirect(article_all)
     else:
       context['formset'] = formset
   else:
