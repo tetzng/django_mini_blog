@@ -1,0 +1,29 @@
+{% extends 'base/base.html' %}
+
+{% block title %}blog-new{% endblock %}
+
+{% block jumbotron %}
+<h1 class="h3">新規投稿ページ</h1>
+{% endblock %}
+
+{% block body %}
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <h4>タグの追加</h4>
+    {{ formset.management_form }}
+    {% for tag_form in formset %}
+        {{ tag_form.as_p }}
+        <hr>
+    {% endfor %}
+    {% if form.instance.pk %}
+        <div class="form-group">
+            <label for="{{ form.DELETE.id_for_label }}">{{ form.DELETE.label_tag }}</label>
+            {{ form.DELETE }}
+        </div>
+    {% endif %}
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">送信</button>
+</form>
+{% endblock %}

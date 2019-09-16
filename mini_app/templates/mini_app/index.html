@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %}
+
+{% block title %}blog-index{% endblock %}
+
+{% block jumbotron %}
+<h1 class="h3">トップページ</h1>
+{% endblock %}
+{% block body %}
+<div class="row">
+  <div class="col-12">
+    <a href="{% url 'new' %}">新規記事の投稿</a>
+  </div>
+  <div class="col-12">
+    <a href="{% url 'article_all' %}">投稿された記事一覧</a>
+  </div>
+</div>
+{% endblock %}
