@@ -31,7 +31,9 @@ def new(request):
 
 def article_all(request):
   template_name = "mini_app/article_all.html"
-  context = {"articles":models.Article.objects.order_by('posted_at')}
+  context = {"articles":models.Article.objects.order_by('posted_at'),
+            "login_user_id": request.user.id
+            }
   return render(request,template_name,context)
 
 def view_article(request,pk):
@@ -133,5 +135,7 @@ def view_tag(request,pk):
     articles = tag.article_set.all()
   except models.Tag.DoesNotExist:
     raise Http404
-  context = {"tag": tag, "articles": articles.order_by('posted_at')}
+  context = {"tag": tag,
+             "articles": articles.order_by('posted_at'),
+             "login_user_id": request.user.id}
   return render(request,template_name,context)

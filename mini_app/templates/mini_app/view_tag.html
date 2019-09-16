@@ -18,12 +18,14 @@
           <div class="col-12">
             <small>[{{ article.posted_at }}]</small>
           </div>
-          <div class="col-6">
-            <a class="text-primary" href="{% url 'edit' article.pk %}">編集</a>
-          </div>
-          <div class="col-6">
-            <a class="text-danger" href="{% url 'delete' article.pk %}">削除<a>
-          </div>
+          {% if article.author.id == login_user_id %}
+            <div class="col-6">
+              <a class="text-primary" href="{% url 'edit' article.pk %}">編集</a>
+            </div>
+            <div class="col-6">
+              <a class="text-danger" href="{% url 'delete' article.pk %}">削除<a>
+            </div>
+          {% endif %}
         </div>
       </div>
     </div>
