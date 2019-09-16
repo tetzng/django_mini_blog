@@ -51,9 +51,11 @@ def edit(request,pk):
     article = models.Article.objects.get(pk=pk)
   except models.Article.DoesNotExist:
     raise Http404
+  if article.author_id != request.user.id:
+    return redirect(index)
   form = PostCreateForm(request.POST or None, instance=article)
   formset = TagInlineFormSet(request.POST or None, instance=article)
-  if request.method == 'POST' and form.is_valid() and formset.is_valid():
+  if request.method == 'POST' and form.is_valid() and formset.is_valid() and article.author_id == request.user.id:
     form.save()
     formset.save()
     return redirect(view_article, pk=pk)
@@ -68,8 +70,11 @@ def delete(request,pk):
     article = models.Article.objects.get(pk=pk)
   except models.Article.DoesNotExist:
     raise Http404
-  article.delete()
-  return redirect(article_all)
+  if article.author_id == request.user.id:
+    article.delete()
+    return redirect(article_all)
+  else:
+    return redirect(index)
 
 def like(request,pk):
   try:
