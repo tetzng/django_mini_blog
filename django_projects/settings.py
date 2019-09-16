@@ -140,5 +140,4 @@ except ImportError:
     pass
 
 if not DEBUG:
-    from django_heroku import setting
-    django_heroku.setting(locals())
+    django_heroku.settings(locals())
