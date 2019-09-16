@@ -1,3 +1,4 @@
+setuptools
 absl-py==0.8.0
 alabaster==0.7.12
 altgraph==0.16.1
